@@ -1,5 +1,7 @@
+//import { formats } from 'flatpickr/dist/utils/formatting';
 import Notiflix from 'notiflix';
 
+const form = document.querySelector('.form');
 const delayField = document.querySelector('input[name="delay"]');  
 const stepField = document.querySelector('input[name="step"]'); 
 const amountField = document.querySelector('input[name="amount"]');
@@ -15,6 +17,7 @@ function UserSubmit(evt) {
 
   if (delay < 0 || step < 0 || amount <= 0) {
     Notiflix.Notify.failure(`Please enter a correct value`);
+  
   }
 
   const intervalId = setInterval(() => {
@@ -29,9 +32,9 @@ function UserSubmit(evt) {
     });
     delay += step;//есть вопрос
   }, step);
-      
+  form.reset();    
   position = 0;
-};
+}
   function createPromise(position, delay) {
     
   return new Promise((resolve, reject) => {
@@ -45,4 +48,4 @@ function UserSubmit(evt) {
      };    
 }, delay);
   });
-};
+}

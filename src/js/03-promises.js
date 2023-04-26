@@ -2,7 +2,7 @@
 import Notiflix from 'notiflix';
 
 Notiflix.Notify.init({
-  timeout: 9000
+  timeout: 9000 //трохи збільшив ТаймАут
 });
 //const form = document.querySelector('.form');на відео відомості у полях залишаються, тому форму не треба чистити
 const delayField = document.querySelector('input[name="delay"]');  

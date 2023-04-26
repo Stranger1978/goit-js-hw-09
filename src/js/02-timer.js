@@ -2,7 +2,7 @@
 //import "flatpickr/dist/flatpickr.min.css";
 
 const startBtn = document.querySelector('button[Data-Start]');
-const inputField = document.querySelector('#datetime-picker');
+//const inputField = document.querySelector('#datetime-picker');
 
 console.dir(startBtn);
 //let startBtnDisabled = startBtn.setAttribute("disabled", false);

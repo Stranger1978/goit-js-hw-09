@@ -1,4 +1,3 @@
-
 import Notiflix from 'notiflix';
 
 Notiflix.Notify.init({
@@ -21,34 +20,29 @@ function UserSubmit(evt) {
   if (delay < 0 || step < 0 || amount <= 0) {
     Notiflix.Notify.failure(`Please enter a correct value`);
     return;
+  } else {
+    for (let i = 0; i < amount; i++) {
+      position = i + 1;
+      const newDelay = delay + step * i;
+      createPromise(position, newDelay).then(({ position, newDelay }) => {
+        Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${newDelay}ms`);
+      }).catch(({ position, delay }) => {
+        Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${newDelay}ms`);
+      });
+    };
   }
-
-  const intervalId = setInterval(() => {
-    position++;
-    if (position === amount) {
-      clearInterval(intervalId);
-    }
-    createPromise(position, delay).then(({ position, delay }) => {
-      Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
-    }).catch(({ position, delay }) => {
-      Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
-    });
-    delay += step;//есть вопрос
-  }, step);
-  //form.reset();    
-  position = 0;
 }
-  function createPromise(position, delay) {
+
+  function createPromise(position, newDelay) {
     
   return new Promise((resolve, reject) => {
     const shouldResolve = Math.random() > 0.3;
-    setTimeout(
-    () => {
+    setTimeout(() => {
   if (shouldResolve) {
-   resolve({ position, delay });
+   resolve({ position, newDelay });
  } else {
-   reject({ position, delay })
-     };    
-}, delay);
+    reject({ position, newDelay });
+     }    
+}, newDelay);
   });
-}
+  }
